@@ -1,0 +1,28 @@
+import turtle
+import random
+
+def do_random_walk(t,num_steps,step_length):
+    t.reset()
+    for i in range (num_steps):
+        num = random.randint(0,360)
+        t.right(num)
+        t.forward(step_length)
+
+def get_walk_distance(t,num_steps,step_length):
+    do_random_walk(t,num_steps,step_length)
+    return t.distance(0,0)
+
+def get_average_distance(t,num_steps,step_length,num_walks):
+    total_distance = 0
+    for i in range(num_walks):
+        get_walk_distance(t,num_steps,step_length)
+        distance = get_walk_distance(t,num_steps,step_length)
+        total_distance += distance
+    average_distance = total_distance / num_walks
+    return average_distance
+
+t = turtle.Turtle()
+turtle.tracer(100,0)
+
+a = get_average_distance(t, 2000, 3, 5)
+print("The average distance:",round(a,2))
